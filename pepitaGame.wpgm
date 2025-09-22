@@ -1,5 +1,9 @@
 import wollok.game.*
 import pepita.*
+import silvestre.*
+import nido.*
+
+
 
 program pepitaGame {
 	game.title("Pepita") 	//Valor por defecto "Wollok Game"
@@ -9,6 +13,14 @@ program pepitaGame {
 	//search assets in assets folder, for example, for the background
 	//Valor por defecto game.ground("ground.png")
 	
-	//game.addVisual(pepita)
+	game.addVisualCharacter(pepita)
+	game.addVisual(silvestre)
+	game.addVisual(nido)
+
+	//game.onTick(100, "Movimiento de silvestre", {silvestre.perseguirA(pepita)})
+
+	game.whenCollideDo(silvestre,{pepita => pepita.esAtrapada()})
+
+
 	game.start()	
 }
