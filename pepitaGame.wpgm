@@ -15,12 +15,6 @@ program pepitaGame {
 	
 	game.addVisualCharacter(pepita)
 	game.addVisual(silvestre)
-	game.addVisual(nido)
-
-	//game.onTick(100, "Movimiento de silvestre", {silvestre.perseguirA(pepita)})
-
-	game.whenCollideDo(silvestre,{pepita => pepita.esAtrapada()})
-
 
 	game.start()	
 }

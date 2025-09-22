@@ -1,16 +1,14 @@
 import pepita.*
 object silvestre {
 
+     var property presa = pepita 
 	// Game
-	var property position = game.origin()
+	var property position = game.at(3,0)
 	method image() {return "silvestre.png"}
 
    method position() {
-        return game.at(pepita.position().x(),0)
-   }
-
-   method atraparA(unAve) {
-        unAve.esAtrapada()
+          const posX = pepita.position().x().max(3)
+          return game.at(posX, 0)
    }
     
 }
