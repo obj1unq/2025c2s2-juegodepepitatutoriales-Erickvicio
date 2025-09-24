@@ -1,4 +1,5 @@
 import silvestre.*
+import muro.*
 
 object pepita {
 
@@ -7,6 +8,7 @@ object pepita {
 
 	method comer(comida) {
 		energia = energia + comida.energiaQueOtorga()
+		game.removeVisual(comida)
 	}
 
 	method volar(kms) {
@@ -18,55 +20,75 @@ object pepita {
 	}
 
 	// Game
-	var property imagenActual = "pepita.png" 
-	var property position = game.at(0, 3)
+	var property imagenActual = "pepita.png"
+	var property position = game.at(0,3)  
+	var prePosition = null
 
-	method image() {
-		if(self.estaAtrapada()){
-			self.cambiarAGris()
-		}
-		return imagenActual
+	method position(){
+		return game.at(self.posX(), self.posY())
+	}
+	method posX() {
+		const posX = position.x().max(0)
+		return posX.min(game.width()-1)
+	}
+	method posY() {
+		const posY = position.y().max(0)
+		return posY.min(game.height()-1)
 	}
 
+	const costoEnergetico = 9
+
+	method moverArriba() {
+		self.validarMover()
+		prePosition = position
+		position = position.up(1)
+		energia -= costoEnergetico
+	}
+	method moverAbajo() {
+		self.validarMover()
+		prePosition = position
+		position = position.down(1)
+		energia -= costoEnergetico
+	}
+	method moverIzq() {
+		self.validarMover()
+		prePosition = position
+		position = position.left(1)
+		energia -= costoEnergetico
+	}
+	method moverDer() {
+		self.validarMover()
+		prePosition = position
+		position = position.right(1)
+		energia -= costoEnergetico
+	}
+	method image() {
+		return imagenActual
+	}
 	method cambiarAGris() {
 		imagenActual = "pepita-gris.png"
 	}
-
-	method estaAtrapada() {
-		return self.position() == silvestre.position()
-	}
-
-	method movimiento(){
-		if(keyboard.w()){
-			return 1
-		}
-		else if(keyboard.s()){
-			return -1
-		}
-		else if(keyboard.a()){
-			return -1
-		}
-		else if(keyboard.d()){
-			return 1
-		}else{
-			return 0
-		}
-	}
-
+	
 	method tieneEnergiaSuficiente() {
-		return pepita.energia() > 0
+		return energia > 0
 	}
-
-	method mover() {
-		const costoEnergetico = 9
-
-		if(self.tieneEnergiaSuficiente()){
-			energia -= costoEnergetico
-			position = game.at(position.x() + self.movimiento(), position.y()+ self.movimiento())
-			
+	method validarMover() {
+		if(not self.tieneEnergiaSuficiente()){
+			self.cambiarAGris()
+			self.error("No tiene suficiente energia para seguir moviendose")
 		}
 	}
-
+	method decender() {
+		prePosition = position
+		position = position.down(1)
+	}
+	method noPuedeAvanzar() {
+		position = prePosition
+	}
+	method endStage() {
+		self.cambiarAGris()
+		energia = 0
+	}
 
 }
 

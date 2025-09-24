@@ -7,8 +7,8 @@ object silvestre {
 	method image() {return "silvestre.png"}
 
    method position() {
-          const posX = pepita.position().x().max(3)
-          return game.at(posX, 0)
+      const posX = pepita.position().x().max(3)
+      return game.at(posX, 0)
    }
     
 }
