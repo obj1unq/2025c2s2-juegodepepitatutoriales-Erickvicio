@@ -7,8 +7,6 @@ import comidas.*
 import gameManager.*
 
 
-
-
 program pepitaGame {
 	game.title("Pepita") 	//Valor por defecto "Wollok Game"
 	game.height(10) 		//valor por defecto 5
@@ -32,12 +30,5 @@ program pepitaGame {
 	//Gravedad
 	game.onTick(800, "Gravedad", {pepita.decender()})
 	//Colisiones
-	game.whenCollideDo(muro, {pepita => pepita.noPuedeAvanzar()})
-	game.whenCollideDo(silvestre, {pepita => pepita.noPuedeAvanzar() 
-											game.removeTickEvent("Gravedad")
-											pepita.endStage() })
-	game.whenCollideDo(pepita, {alimento => pepita.comer(alimento)})
-
-
 	game.start()	
 }
