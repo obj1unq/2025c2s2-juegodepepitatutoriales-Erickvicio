@@ -1,3 +1,4 @@
+import pepita.*
 
 object paleta {
     const property verde =  "00FF00FF"
@@ -7,19 +8,30 @@ object paleta {
 
 object gameManager {
 // Game
-	var property position = game.center()
+	var property position = game.at(5,6)
     var property text = ""
     var property colorAsignado = paleta.azul() 
 
     method textColor() = colorAsignado 
 
-    method winStage() {
-        colorAsignado = paleta.azul()
+    method pepitaGano() {
+        colorAsignado = paleta.verde()
         self.text("GANAsTE :D")
+
+        game.removeTickEvent("Gravedad")
+        game.schedule(2000, {game.stop()})
     }
 
-    method loseStage() {
+    method pepitaPerdio() {
         colorAsignado = paleta.rojo()
         self.text("Perdiste :c")
+
+        game.removeTickEvent("Gravedad")
+        game.schedule(2000, {game.stop()})
+        
+    }
+
+    method colisionoCon(obj) {
+        
     }
 }

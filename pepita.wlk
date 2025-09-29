@@ -1,3 +1,4 @@
+import gameManager.*
 import comidas.*
 import silvestre.*
 import muro.*
@@ -24,7 +25,6 @@ object pepita {
 	var property imagenActual 	= "pepita.png"
 	var property position 		= game.at(0,3)  
 	var prePosition 			= null
-	var esPrimeraColision 		= true
 
 	method position(){
 		return game.at(self.posX(), self.posY())
@@ -64,21 +64,8 @@ object pepita {
 		position = position.right(1)
 		energia -= costoEnergetico
 	}
-	method image() {
-		if(self.estaColisionandoCon(muro)){
-			self.noPuedeAvanzar()
-		}
-		if(self.estaColisionandoCon(manzana)){
-			self.comer(manzana)
-		}
-		if( self.estaColisionandoCon(alpiste)){
-			self.comer(alpiste)
-		}
-		if(self.estaColisionandoCon(silvestre)){
-			self.endStage()
-		} 
-		return imagenActual
-	}
+	method image() { return imagenActual }
+
 	method cambiarAGris() {
 		imagenActual = "pepita-gris.png"
 	}
@@ -99,18 +86,13 @@ object pepita {
 		position = prePosition
 	}
 	method endStage() {
+		gameManager.pepitaPerdio()
 		self.cambiarAGris()
 		energia = 0
 	}
-	method estaColisionandoCon(unObjeto) {
-		return (unObjeto.position() == position)
+	method winStage() {
+		energia = 0
+		gameManager.pepitaGano()
 	}
-	/*
-	method estaColisionando(unObj) = {
-		unObj == muro -> self.noPuedeAvanzar()
-		unObj == manzana -> self.comer(manzana)
-		unObj == alpiste -> self.comer(alpiste)
-		unObj == silvestre -> self.endStage()
-	}*/
 }
 

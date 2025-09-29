@@ -10,5 +10,8 @@ object silvestre {
       const posX = pepita.position().x().max(3)
       return game.at(posX, 0)
    }
+   method colisionoCon(obj) {
+		obj.endStage()
+	}
     
 }

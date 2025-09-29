@@ -15,12 +15,13 @@ program pepitaGame {
 	//search assets in assets folder, for example, for the background
 	//Valor por defecto game.ground("ground.png")
 	
+	game.addVisual(gameManager)
 	game.addVisual(pepita)
 	game.addVisual(silvestre)
 	game.addVisual(muro)
 	game.addVisual(alpiste)
 	game.addVisual(manzana)
-	//game.addVisual(gameManager)
+	game.addVisual(nido)
 
 	//Movement Pepita
 	keyboard.right().onPressDo({ pepita.moverDer()})
@@ -30,5 +31,7 @@ program pepitaGame {
 	//Gravedad
 	game.onTick(800, "Gravedad", {pepita.decender()})
 	//Colisiones
+	game.onCollideDo(pepita, {other => other.colisionoCon(pepita)})
+
 	game.start()	
 }
