@@ -1,5 +1,11 @@
 import wollok.game.*
 import pepita.*
+import silvestre.*
+import nido.*
+import muro.*
+import comidas.*
+import gameManager.*
+
 
 program pepitaGame {
 	game.title("Pepita") 	//Valor por defecto "Wollok Game"
@@ -9,6 +15,31 @@ program pepitaGame {
 	//search assets in assets folder, for example, for the background
 	//Valor por defecto game.ground("ground.png")
 	
-	//game.addVisual(pepita)
+
+	//Muros
+	game.addVisual(muro)
+	game.addVisual(muro1)
+	game.addVisual(muro2)
+	game.addVisual(muro3)
+	game.addVisual(muro4)
+	//Otros
+	game.addVisual(silvestre)
+	game.addVisual(alpiste)
+	game.addVisual(manzana)
+	game.addVisual(nido)
+	game.addVisual(pepita)
+	game.addVisual(gameManager)
+	game.addVisual(uiEnergiaDePepita)
+
+	//Movement Pepita
+	keyboard.right().onPressDo({ pepita.moverDer()})
+	keyboard.left().onPressDo({ pepita.moverIzq()})
+	keyboard.up().onPressDo({ pepita.moverArriba()})
+	keyboard.down().onPressDo({ pepita.moverAbajo()})
+	//Gravedad
+	game.onTick(800, "Gravedad", {pepita.decender()})
+	//Colisiones
+	game.onCollideDo(pepita, {other => other.colisionoCon(pepita)})
+
 	game.start()	
 }
