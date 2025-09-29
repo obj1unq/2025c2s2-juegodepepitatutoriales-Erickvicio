@@ -14,7 +14,7 @@ object manzana {
 	}
 
 	// Game
-	var property position = game.at(8,8) 
+	var property position = game.at(6,6) 
 	method image() {return "manzana.png"}
 
 	method colisionoCon(obj) {
@@ -29,7 +29,7 @@ object alpiste {
 	} 
 
 	// Game
-	var property position = game.at(9, 9) 
+	var property position = game.at(4, 6) 
 	method image() {return "alpiste.png"}
 
 	method colisionoCon(obj) {

@@ -15,13 +15,18 @@ program pepitaGame {
 	//search assets in assets folder, for example, for the background
 	//Valor por defecto game.ground("ground.png")
 	
-	game.addVisual(gameManager)
-	game.addVisual(pepita)
 	game.addVisual(silvestre)
-	game.addVisual(muro)
 	game.addVisual(alpiste)
 	game.addVisual(manzana)
 	game.addVisual(nido)
+	game.addVisual(pepita)
+	game.addVisual(gameManager)
+
+	//Muros
+	game.addVisual(muro)
+	game.addVisual(muro1)
+	game.addVisual(muro2)
+
 
 	//Movement Pepita
 	keyboard.right().onPressDo({ pepita.moverDer()})
