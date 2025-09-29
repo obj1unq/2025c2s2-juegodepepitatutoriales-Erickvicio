@@ -3,20 +3,29 @@ import pepita.*
 object paleta {
     const property verde =  "00FF00FF"
     const property rojo =   "FF0000FF"
-    const property azul =   "00000FF" 
+    const property blanco =   "00000FF" 
 }
 
 object gameManager {
 // Game
-	var property position = game.at(5,6)
-    var property text = ""
-    var property colorAsignado = paleta.azul() 
+	var property position = game.center()
+    var property mensaje =  ""
+    var property colorAsignado = paleta.blanco() 
+
+    method text() {
+        return mensaje
+    }
+
+    method energiaDePepita() {
+        return "" + pepita.energia()
+    }
 
     method textColor() = colorAsignado 
 
+
     method pepitaGano() {
         colorAsignado = paleta.verde()
-        self.text("GANAsTE :D")
+        mensaje = "GANAsTE :D"
 
         game.removeTickEvent("Gravedad")
         game.schedule(2000, {game.stop()})
@@ -24,14 +33,19 @@ object gameManager {
 
     method pepitaPerdio() {
         colorAsignado = paleta.rojo()
-        self.text("Perdiste :c")
+        mensaje = "Perdiste :c"
 
         game.removeTickEvent("Gravedad")
         game.schedule(2000, {game.stop()})
         
     }
+    method colisionoCon(obj) {}
+}
 
-    method colisionoCon(obj) {
-        
-    }
+
+object uiEnergiaDePepita {
+	var property position = game.at(5,9)
+    method text() {return "La energia de pepita es "+ pepita.energia() }
+    method textColor() = paleta.blanco()
+    method colisionoCon(obj) {} 
 }

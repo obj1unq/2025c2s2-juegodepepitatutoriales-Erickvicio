@@ -6,7 +6,7 @@ import muro.*
 object pepita {
 
 	
-	var energia = 500
+	var property energia = 500
 
 	method comer(comida) {
 		energia = energia + comida.energiaQueOtorga()
@@ -16,10 +16,7 @@ object pepita {
 	method volar(kms) {
 		energia = energia - 10 - kms 
 	}
-	
-	method energia() {
-		return energia
-	}
+
 
 	// Game
 	var property imagenActual 	= "pepita.png"
@@ -43,25 +40,25 @@ object pepita {
 	method moverArriba() {
 		self.validarMover()
 		prePosition = position
-		position = position.up(1)
+		position = game.at(self.posX(), self.posY()).up(1)
 		energia -= costoEnergetico
 	}
 	method moverAbajo() {
 		self.validarMover()
 		prePosition = position
-		position = position.down(1)
+		position = game.at(self.posX(), self.posY()).down(1)
 		energia -= costoEnergetico
 	}
 	method moverIzq() {
 		self.validarMover()
 		prePosition = position
-		position = position.left(1)
+		position = game.at(self.posX(), self.posY()).left(1)
 		energia -= costoEnergetico
 	}
 	method moverDer() {
 		self.validarMover()
 		prePosition = position
-		position = position.right(1)
+		position = game.at(self.posX(), self.posY()).right(1)
 		energia -= costoEnergetico
 	}
 	method image() { return imagenActual }
@@ -74,6 +71,7 @@ object pepita {
 	}
 	method validarMover() {
 		if(not self.tieneEnergiaSuficiente()){
+			energia = 0
 			self.cambiarAGris()
 			self.error("No tiene suficiente energia para seguir moviendose")
 		}
@@ -91,6 +89,8 @@ object pepita {
 		energia = 0
 	}
 	method winStage() {
+
+		imagenActual = "pepita-grande.png"
 		energia = 0
 		gameManager.pepitaGano()
 	}
